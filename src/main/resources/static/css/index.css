@@ -245,7 +245,7 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     color: #1a1a1a;
     padding: 15px 20px;
     margin-top: 1.5rem;
-    transform: rotate(-15deg);
+    transform: rotate(-10deg);
     width: 160px !important;
     max-width: 160px !important;
     align-self: flex-start !important;
