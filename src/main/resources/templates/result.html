@@ -92,14 +92,17 @@
         <div class="main-display">
             <section class="retro-window">
                 <div style="position: absolute; top: 15px; left: 20px; display: flex; gap: 8px;">
-                    <div style="width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #000; background: #ff5f56;"></div>
-                    <div style="width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #000; background: #ffbd2e;"></div>
-                    <div style="width: 12px; height: 12px; border-radius: 50%; border: 1.5px solid #000; background: #27c93f;"></div>
+                    <div style="width: 12px; height: 12px; border: 2px solid #000; background: #ff5f56; clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);"></div>
+                    <div style="width: 12px; height: 12px; border: 2px solid #000; background: #ffbd2e; clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);"></div>
+                    <div style="width: 12px; height: 12px; border: 2px solid #000; background: #27c93f; clip-path: polygon(25% 0%, 75% 0%, 100% 25%, 100% 75%, 75% 100%, 25% 100%, 0% 75%, 0% 25%);"></div>
                 </div>
                 
-                <div style="position: absolute; top: 15px; right: 20px; background: #0c0c0c; color: var(--accent-green); padding: 2px 12px; font-size: 0.75rem; border-radius: 6px; font-weight: bold;" th:text="${filename}">
+                <div style="position: absolute; top: 15px; right: 20px; background: #0c0c0c; color: #88cc44; padding: 4px 12px; font-size: 0.75rem; border-radius: 6px; font-weight: bold; font-family: var(--terminal-font); text-transform: uppercase;" th:text="${filename}">
                     pom.xml
                 </div>
+
+                <!-- Divider Line -->
+                <div style="position: absolute; top: 45px; left: 0; right: 0; height: 2px; background: #0c0c0c; opacity: 0.2;"></div>
 
                 <div style="width: 100%;">
                     <h2 style="font-family: var(--pixel-font); font-size: 3rem; color: #0c0c0c; line-height: 1; margin-bottom: 2rem;">

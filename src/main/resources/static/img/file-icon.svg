@@ -1,0 +1,14 @@
+<svg width="100" height="100" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
+  <!-- Body -->
+  <path d="M4 2 H14 L18 6 V22 H4 Z" fill="#a89b7c" stroke="#0c0c0c" stroke-width="2"/>
+  <!-- Corner fold -->
+  <path d="M14 2 V6 H18" fill="#8d7e5d" stroke="#0c0c0c" stroke-width="2"/>
+  <!-- Brackets inside -->
+  <rect x="7" y="10" width="2" height="2" fill="#0c0c0c"/>
+  <rect x="8" y="12" width="2" height="2" fill="#0c0c0c"/>
+  <rect x="7" y="14" width="2" height="2" fill="#0c0c0c"/>
+  
+  <rect x="15" y="10" width="2" height="2" fill="#0c0c0c"/>
+  <rect x="14" y="12" width="2" height="2" fill="#0c0c0c"/>
+  <rect x="15" y="14" width="2" height="2" fill="#0c0c0c"/>
+</svg>
