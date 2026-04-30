@@ -367,3 +367,97 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     transform: scale(1.02);
     transition: all 0.2s ease;
 }
+
+/* Pixel Text Shadow Utility */
+.pixel-text-shadow {
+    color: var(--accent-pink);
+    text-shadow: 
+        1px 1px 0 #0c0c0c,
+        2px 2px 0 #0c0c0c,
+        3px 3px 0 #0c0c0c,
+        4px 4px 0 #0c0c0c,
+        5px 5px 0 #0c0c0c,
+        6px 6px 0 #0c0c0c;
+}
+
+/* --- RESPONSIVE DESIGN --- */
+
+/* Tablets & Small Laptops (max-width: 1100px) */
+@media (max-width: 1100px) {
+    .hero-content {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 3rem !important;
+    }
+    
+    .hero-text {
+        width: 100% !important;
+        padding-top: 2rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .hero-text h2 {
+        font-size: 3.2rem !important;
+    }
+
+    .hero-console-wrapper {
+        transform: translateX(0) !important;
+        width: 100% !important;
+        display: flex;
+        justify-content: center;
+    }
+
+    .hero-console {
+        width: 100% !important;
+        max-width: 420px !important;
+    }
+
+    .ticket-sticker {
+        right: -10px !important;
+        top: -30px !important;
+    }
+}
+
+/* Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+    body {
+        height: auto !important;
+        overflow-y: auto !important;
+    }
+
+    .app-container {
+        display: flex !important;
+        flex-direction: column !important;
+        height: auto !important;
+    }
+
+    .sidebar {
+        width: 100% !important;
+        max-height: none !important;
+    }
+
+    .logo-section h1 {
+        font-size: 3rem !important;
+    }
+
+    .hero-text h2 {
+        font-size: 2.5rem !important;
+    }
+
+    .terminal-window, .taped-note {
+        display: none !important; /* Hide to save vertical space on mobile */
+    }
+    
+    .sidebar nav ul {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+    
+    .sidebar nav ul li {
+        margin-bottom: 0 !important;
+    }
+}
