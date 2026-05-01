@@ -19,9 +19,9 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--terminal-font);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
-    overflow: hidden;
+    overflow-x: hidden;
     padding: 12px;
 }
 
@@ -666,5 +666,223 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     animation: scanline 3s linear infinite;
     pointer-events: none;
 }
+
+/* ============================================================
+   RESPONSIVE DESIGN SYSTEM
+   ============================================================ */
+
+/* TABLET & SMALL DESKTOP (1024px and below) */
+@media screen and (max-width: 1024px) {
+    .app-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 1rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        overflow: visible;
+    }
+
+    .logo-section {
+        margin: 0;
+        border-bottom: none;
+    }
+
+    .logo-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .tagline {
+        display: none; /* Hide tagline on mobile/tablet sidebar */
+    }
+
+    .mascot-area {
+        display: none; /* Hide mascot in top-bar mode */
+    }
+
+    .sidebar nav {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .sidebar nav ul {
+        display: flex;
+        justify-content: space-around;
+        margin: 0;
+    }
+
+    .sidebar nav li {
+        border-bottom: none;
+        margin: 0;
+    }
+
+    .sidebar nav li a {
+        padding: 5px 10px;
+        font-size: 1rem;
+    }
+
+    .sidebar-footer {
+        display: none; /* Hide terminal/notes in top-bar mode */
+    }
+
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 3rem;
+    }
+
+    .hero-text {
+        padding-top: 2rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-text h2 {
+        font-size: 3rem !important;
+    }
+
+    .hero-text p {
+        max-width: 100% !important;
+    }
+
+    .hero-console-wrapper {
+        transform: none !important;
+        margin-top: 0 !important;
+    }
+
+    .hero-console {
+        width: 100% !important;
+        max-width: 500px;
+    }
+
+    .ticket-sticker {
+        right: 0 !important;
+        top: -30px !important;
+        transform: rotate(5deg) scale(0.8) !important;
+    }
+}
+
+/* MOBILE (768px and below) */
+@media screen and (max-width: 768px) {
+    body {
+        padding: 8px;
+    }
+
+    .retro-window {
+        padding: 1.5rem 1rem 1rem 1rem !important;
+    }
+
+    .hero-text h2 {
+        font-size: 2.2rem !important;
+    }
+
+    .hero-text p {
+        font-size: 0.85rem !important;
+        br { display: none; } /* Allow text to flow naturally */
+    }
+
+    .hero-console {
+        min-height: 300px !important;
+    }
+
+    .upload-zone {
+        padding: 1rem !important;
+    }
+
+    .upload-zone img {
+        width: 50px !important;
+    }
+
+    .upload-zone div {
+        font-size: 1rem !important;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    /* System Ready Label */
+    .retro-window [style*="SYSTEM: READY"] {
+        right: 10px !important;
+        font-size: 0.6rem !important;
+        padding: 2px 8px !important;
+    }
+
+    /* Modal Scaling */
+    .modal-content {
+        width: 95% !important;
+        padding: 1rem !important;
+    }
+
+    .modal-content h2 {
+        font-size: 1.8rem !important;
+    }
+
+    .history-scroll-area table {
+        font-size: 0.6rem !important;
+    }
+}
+
+/* SMALL MOBILE (480px and below) */
+@media screen and (max-width: 480px) {
+    .logo-section h1 {
+        font-size: 2rem;
+    }
+
+    .sidebar nav li a {
+        font-size: 0.8rem;
+        gap: 5px;
+        padding: 4px 6px;
+    }
+
+    .sidebar nav li a svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .hero-text h2 {
+        font-size: 1.8rem !important;
+    }
+
+    .scanning-text {
+        font-size: 1.8rem !important;
+    }
+
+    .progress-container {
+        height: 25px !important;
+    }
+}
+
+/* RESULTS PAGE SPECIFIC */
+.results-heading {
+    font-size: 4.5rem;
+}
+
+@media screen and (max-width: 1024px) {
+    .results-heading {
+        font-size: 3rem;
+    }
+    
+    .summary-cards-container {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .results-heading {
+        font-size: 2.2rem;
+    }
+}
+
 
 
