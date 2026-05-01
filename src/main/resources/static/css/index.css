@@ -845,9 +845,13 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     }
 
     footer {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        text-align: left !important;
+        gap: 5px;
+        padding: 8px 15px !important;
+        font-size: 0.6rem !important;
     }
 
     /* System Ready Label */
