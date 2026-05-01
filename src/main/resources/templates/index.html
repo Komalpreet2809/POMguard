@@ -163,7 +163,7 @@
                             <!-- Inner Body with Dashed Zone -->
                             <div class="upload-zone" style="flex: 1; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                 <div style="width: 100%; height: 100%; border: 3px dashed rgba(0,0,0,0.2); border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem;">
-                                    <form id="upload-form" method="post" action="/audit" enctype="multipart/form-data" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                                    <form id="upload-form" method="post" th:action="@{/audit}" enctype="multipart/form-data" onsubmit="return startScanning()" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                                         <label for="file" style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
                                             <img th:src="@{/img/file-icon.svg}" alt="File" style="width: 70px; height: auto; image-rendering: pixelated; margin-bottom: 1rem;">
                                             <div style="font-family: var(--pixel-font); font-weight: normal; font-size: 1.4rem; color: #0c0c0c; text-transform: uppercase; letter-spacing: 1px;">Drop your pom.xml here</div>
@@ -171,15 +171,20 @@
                                             <div id="file-name-display" style="font-family: var(--pixel-font); font-weight: normal; font-size: 1.4rem; color: #0c0c0c; text-transform: uppercase; letter-spacing: 1px;">Choose File</div>
                                         </label>
                                         <input type="file" id="file" name="file" accept=".xml" required style="display: none;" onchange="document.getElementById('file-name-display').innerText = this.files.length > 0 ? this.files[0].name : 'Choose File'">
+                                        
+                                        <!-- Submit button moved INSIDE form -->
+                                        <div style="margin-top: 1.5rem;">
+                                            <button type="submit" id="start-audit-btn" style="background: var(--accent-pink); color: #0c0c0c; border: 3px solid #0c0c0c; padding: 10px 25px; font-weight: bold; font-family: var(--pixel-font); font-size: 1.2rem; box-shadow: 4px 4px 0 #0c0c0c; cursor: pointer; transition: transform 0.1s;">
+                                                START AUDIT
+                                            </button>
+                                        </div>
                                     </form>
                                 </div>
                             </div>
 
-                            <!-- Action Footer Bar -->
-                            <div style="background: rgba(0,0,0,0.05); border-top: 2px solid rgba(0,0,0,0.1); padding: 12px 25px; display: flex; align-items: center; justify-content: flex-end;">
-                                <button type="button" id="start-audit-btn" onclick="handleAuditClick()" style="background: var(--accent-pink); color: #0c0c0c; border: 3px solid #0c0c0c; padding: 10px 25px; font-weight: bold; font-family: var(--pixel-font); font-size: 1.2rem; box-shadow: 4px 4px 0 #0c0c0c; cursor: pointer; transition: transform 0.1s;">
-                                    START AUDIT
-                                </button>
+                            <!-- Action Footer Bar simplified -->
+                            <div style="background: rgba(0,0,0,0.05); border-top: 2px solid rgba(0,0,0,0.1); padding: 5px; display: flex; align-items: center; justify-content: center;">
+                                <div style="font-family: var(--terminal-font); font-size: 0.7rem; color: #666; text-transform: uppercase;">READY FOR SCAN</div>
                             </div>
                         </div>
 
@@ -358,20 +363,11 @@
             });
         });
 
-        function handleAuditClick() {
-            const fileInput = document.getElementById('file');
-            if (fileInput.files.length === 0) {
-                fileInput.click();
-            } else {
-                startScanning();
-            }
-        }
-
         function startScanning() {
+            console.log("Audit started...");
             const overlay = document.getElementById('scan-overlay');
             const progress = document.getElementById('scan-progress');
             const btn = document.getElementById('start-audit-btn');
-            const form = document.getElementById('upload-form');
 
             overlay.classList.add('active');
             btn.innerText = "SCANNING...";
@@ -388,12 +384,10 @@
                     if (width > 90) width = 90;
                     progress.style.width = width + '%';
                 }
-            }, 200);
+            }, 100);
 
-            // Give it a tiny delay for visual effect before submitting
-            setTimeout(() => {
-                form.submit();
-            }, 800);
+            // Return true to allow the form to submit
+            return true;
         }
     </script>
 </body>
