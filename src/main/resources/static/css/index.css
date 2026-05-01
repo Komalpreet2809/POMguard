@@ -588,44 +588,46 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(12, 12, 12, 0.95);
+    background: rgba(255, 253, 242, 0.98); /* Warm yellow matching UI */
     z-index: 100;
     display: none;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #88cc44;
+    color: #0c0c0c;
     font-family: var(--pixel-font);
     text-align: center;
 }
 
 .scanning-overlay.active {
     display: flex;
-    animation: fadeIn 0.3s ease;
+    animation: fadeIn 0.2s ease;
 }
 
 .scanning-text {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    color: var(--accent-pink);
+    text-shadow: 3px 3px 0 #000;
 }
 
 .progress-container {
-    width: 80%;
-    height: 30px;
-    border: 3px solid #88cc44;
+    width: 70%;
+    height: 40px;
+    background: #fff;
+    border: 4px solid #000;
     position: relative;
-    padding: 3px;
+    padding: 0;
+    box-shadow: 6px 6px 0 #000;
 }
 
 .progress-bar {
     height: 100%;
-    background: #88cc44;
+    background: var(--accent-pink);
     width: 0%;
     transition: width 0.1s linear;
     position: relative;
-    box-shadow: 0 0 15px rgba(136, 204, 68, 0.5);
 }
 
 .progress-bar::after {
@@ -657,11 +659,12 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 .scanline {
     position: absolute;
     width: 100%;
-    height: 10px;
-    background: rgba(136, 204, 68, 0.2);
-    box-shadow: 0 0 20px rgba(136, 204, 68, 0.4);
+    height: 20px;
+    background: rgba(255, 95, 126, 0.1);
+    border-bottom: 2px dashed var(--accent-pink);
     top: 0;
-    animation: scanline 2s linear infinite;
+    animation: scanline 3s linear infinite;
     pointer-events: none;
 }
+
 
