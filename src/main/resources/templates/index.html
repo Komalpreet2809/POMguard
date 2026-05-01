@@ -163,14 +163,14 @@
                             <!-- Inner Body with Dashed Zone -->
                             <div class="upload-zone" style="flex: 1; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center;">
                                 <div style="width: 100%; height: 100%; border: 3px dashed rgba(0,0,0,0.2); border-radius: 15px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.5rem;">
-                                    <form id="upload-form" method="post" th:action="@{/audit}" enctype="multipart/form-data" onsubmit="return startScanning()" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                                    <form id="upload-form" method="post" th:action="@{/audit}" enctype="multipart/form-data" onsubmit="return handleAuditSubmit()" style="display: flex; flex-direction: column; align-items: center; width: 100%;">
                                         <label for="file" style="cursor: pointer; display: flex; flex-direction: column; align-items: center;">
                                             <img th:src="@{/img/file-icon.svg}" alt="File" style="width: 70px; height: auto; image-rendering: pixelated; margin-bottom: 1rem;">
                                             <div style="font-family: var(--pixel-font); font-weight: normal; font-size: 1.4rem; color: #0c0c0c; text-transform: uppercase; letter-spacing: 1px;">Drop your pom.xml here</div>
                                             <div style="margin: 0.5rem 0; font-family: var(--pixel-font); color: #666;">or</div>
                                             <div id="file-name-display" style="font-family: var(--pixel-font); font-weight: normal; font-size: 1.4rem; color: #0c0c0c; text-transform: uppercase; letter-spacing: 1px;">Choose File</div>
                                         </label>
-                                        <input type="file" id="file" name="file" accept=".xml" required style="display: none;" onchange="document.getElementById('file-name-display').innerText = this.files.length > 0 ? this.files[0].name : 'Choose File'">
+                                        <input type="file" id="file" name="file" accept=".xml" style="display: none;" onchange="document.getElementById('file-name-display').innerText = this.files.length > 0 ? this.files[0].name : 'Choose File'">
                                         
                                         <!-- Submit button moved INSIDE form -->
                                         <div style="margin-top: 1.5rem;">
@@ -362,6 +362,15 @@
                 }, (index + 1) * 600);
             });
         });
+
+        function handleAuditSubmit() {
+            const fileInput = document.getElementById('file');
+            if (fileInput.files.length === 0) {
+                fileInput.click();
+                return false;
+            }
+            return startScanning();
+        }
 
         function startScanning() {
             console.log("Audit started...");
