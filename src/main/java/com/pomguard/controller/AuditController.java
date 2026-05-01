@@ -3,6 +3,7 @@ package com.pomguard.controller;
 import com.pomguard.model.AuditResult;
 import com.pomguard.model.Dependency;
 import com.pomguard.service.AuditService;
+import com.pomguard.service.HistoryService;
 import com.pomguard.service.PomParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,14 +20,17 @@ public class AuditController {
 
     private final PomParser pomParser;
     private final AuditService auditService;
+    private final HistoryService historyService;
 
-    public AuditController(PomParser pomParser, AuditService auditService) {
+    public AuditController(PomParser pomParser, AuditService auditService, HistoryService historyService) {
         this.pomParser = pomParser;
         this.auditService = auditService;
+        this.historyService = historyService;
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("sessions", historyService.getRecentSessions());
         return "index";
     }
 
@@ -34,6 +38,9 @@ public class AuditController {
     public String audit(@RequestParam("file") MultipartFile file, Model model) throws Exception {
         List<Dependency> deps = pomParser.parse(file.getInputStream());
         List<AuditResult> results = auditService.audit(deps);
+        
+        historyService.addSession(file.getOriginalFilename(), results);
+
         model.addAttribute("results", results);
         model.addAttribute("total", results.size());
         model.addAttribute("filename", file.getOriginalFilename());
