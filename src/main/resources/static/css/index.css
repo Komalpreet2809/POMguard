@@ -697,7 +697,7 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     }
 
     .logo-section h1 {
-        font-size: 2.2rem;
+        font-size: 3.2rem; /* Increased font size */
     }
 
     /* Position sparkle correctly on mobile logo */
@@ -721,9 +721,9 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 
     .sidebar nav ul {
         display: flex;
-        justify-content: flex-end;
-        flex-wrap: nowrap;
-        gap: 15px;
+        flex-direction: column; /* Vertically stacked */
+        align-items: flex-end; /* Stacked on the right */
+        gap: 8px;
         margin: 0;
         padding: 0;
     }
@@ -784,26 +784,29 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 /* MOBILE (768px and below) */
 @media screen and (max-width: 768px) {
     .sidebar {
-        flex-direction: column; /* Stack on smaller mobile */
-        gap: 10px;
-        padding: 1rem;
+        flex-direction: row; /* Keep logo and nav side-by-side */
+        justify-content: space-between;
+        align-items: center; /* Center them vertically relative to each other */
+        gap: 20px;
+        padding: 1rem 1.5rem;
     }
 
     .logo-section h1 {
-        font-size: 2.5rem;
+        font-size: 3.2rem;
     }
 
     .sidebar nav {
-        width: 100%;
+        width: auto;
     }
 
     .sidebar nav ul {
-        justify-content: center;
-        gap: 10px;
+        align-items: flex-end;
+        gap: 6px;
     }
 
     .sidebar nav li a {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
+        padding: 2px 8px;
     }
 
     body {
