@@ -170,10 +170,10 @@
                                             <div style="margin: 0.5rem 0; font-family: var(--pixel-font); color: #666;">or</div>
                                             <div id="file-name-display" style="font-family: var(--pixel-font); font-weight: normal; font-size: 1.4rem; color: #0c0c0c; text-transform: uppercase; letter-spacing: 1px;">Choose File</div>
                                         </label>
-                                        <input type="file" id="file" name="file" accept=".xml" style="display: none;" onchange="document.getElementById('file-name-display').innerText = this.files.length > 0 ? this.files[0].name : 'Choose File'">
+                                        <input type="file" id="file" name="file" accept=".xml" style="display: none;" onchange="handleFileChange(this)">
                                         
-                                        <!-- Submit button moved INSIDE form -->
-                                        <div style="margin-top: 1.5rem;">
+                                        <!-- Submit button hidden by default, shown only after file selection -->
+                                        <div id="audit-btn-container" style="margin-top: 1.5rem; display: none;">
                                             <button type="submit" id="start-audit-btn" style="background: var(--accent-pink); color: #0c0c0c; border: 3px solid #0c0c0c; padding: 10px 25px; font-weight: bold; font-family: var(--pixel-font); font-size: 1.2rem; box-shadow: 4px 4px 0 #0c0c0c; cursor: pointer; transition: transform 0.1s;">
                                                 START AUDIT
                                             </button>
@@ -362,6 +362,19 @@
                 }, (index + 1) * 600);
             });
         });
+
+        function handleFileChange(input) {
+            const display = document.getElementById('file-name-display');
+            const btnContainer = document.getElementById('audit-btn-container');
+            
+            if (input.files.length > 0) {
+                display.innerText = input.files[0].name;
+                btnContainer.style.display = 'block';
+            } else {
+                display.innerText = 'Choose File';
+                btnContainer.style.display = 'none';
+            }
+        }
 
         function handleAuditSubmit() {
             const fileInput = document.getElementById('file');
