@@ -19,9 +19,9 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     font-family: var(--terminal-font);
-    min-height: 100vh;
+    height: 100vh; /* Restore fixed height for desktop */
     display: flex;
-    overflow-x: hidden;
+    overflow: hidden; /* Prevent body scroll on desktop */
     padding: 12px;
 }
 
@@ -783,6 +783,12 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 
 /* MOBILE (768px and below) */
 @media screen and (max-width: 768px) {
+    body {
+        height: auto !important; /* Allow scroll on mobile */
+        min-height: 100vh !important;
+        overflow-y: auto !important;
+        padding: 8px;
+    }
     .sidebar {
         flex-direction: row; /* Keep logo and nav side-by-side */
         justify-content: space-between;
