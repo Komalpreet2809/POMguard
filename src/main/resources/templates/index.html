@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POMGUARD // Eco-Code Auditor</title>
     <!-- Cache busting with version parameter -->
-    <link rel="stylesheet" th:href="@{/css/index.css?v=1003}">
-    </style>
+    <link rel="stylesheet" th:href="@{/css/index.css?v=1012}">
 </head>
 <body>
     <div class="app-container">
@@ -166,7 +165,7 @@
 
                             <!-- Action Footer Bar -->
                             <div style="background: rgba(0,0,0,0.05); border-top: 2px solid rgba(0,0,0,0.1); padding: 12px 25px; display: flex; align-items: center; justify-content: flex-end;">
-                                <button type="button" onclick="document.getElementById('upload-form').submit()" style="background: var(--accent-pink); color: #0c0c0c; border: 3px solid #0c0c0c; padding: 10px 25px; font-weight: bold; font-family: var(--pixel-font); font-size: 1.2rem; box-shadow: 4px 4px 0 #0c0c0c; cursor: pointer; transition: transform 0.1s;">
+                                <button type="button" onclick="const fileInput = document.getElementById('file'); if(fileInput.files.length === 0) { fileInput.click(); } else { document.getElementById('upload-form').submit(); }" style="background: var(--accent-pink); color: #0c0c0c; border: 3px solid #0c0c0c; padding: 10px 25px; font-weight: bold; font-family: var(--pixel-font); font-size: 1.2rem; box-shadow: 4px 4px 0 #0c0c0c; cursor: pointer; transition: transform 0.1s;">
                                     START AUDIT
                                 </button>
                             </div>
@@ -189,7 +188,7 @@
     </div>
     <!-- About Modal -->
     <div id="about-modal" class="modal-overlay">
-        <div class="retro-window modal-content" style="width: 500px; max-width: 90%; background: var(--bg-color);">
+        <div class="retro-window modal-content" style="background: var(--bg-color);">
             <div style="background: var(--bg-color); color: #88cc44; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #333; margin: -2rem -2rem 1.5rem -2rem;">
                 <div style="font-family: var(--terminal-font); font-size: 0.85rem; font-weight: bold;">// ABOUT POMGUARD</div>
                 <button id="close-modal-btn" style="background: none; border: none; cursor: pointer; display: flex; gap: 6px; padding: 5px;">
@@ -252,7 +251,7 @@
 
     <!-- History Modal -->
     <div id="history-modal" class="modal-overlay">
-        <div class="retro-window modal-content" style="width: 750px; max-width: 95%; background: var(--bg-color);">
+        <div class="retro-window modal-content" style="background: var(--bg-color);">
             <div style="background: var(--bg-color); color: #70a1ff; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed #333; margin: -2rem -2rem 1.5rem -2rem;">
                 <div style="font-family: var(--terminal-font); font-size: 0.85rem; font-weight: bold;">// AUDIT HISTORY</div>
                 <button id="close-history-btn" style="background: none; border: none; cursor: pointer; display: flex; gap: 6px; padding: 5px;">
@@ -278,27 +277,33 @@
                     </thead>
                     <tbody>
                         <!-- Dynamic Sessions -->
-                        <tr th:each="session : ${sessions}" style="border-bottom: 1px solid var(--border-color); transition: background 0.2s;" onmouseover="this.style.background='rgba(112, 161, 255, 0.1)'" onmouseout="this.style.background='transparent'">
-                            <td style="padding: 12px 10px; border: 1px solid var(--border-color); color: #88cc44;" th:text="${session.getFormattedDate()}">2026-05-01 12:45</td>
-                            <td style="padding: 12px 10px; border: 1px solid var(--border-color); color: var(--text-color); font-weight: bold;" th:text="${session.projectName}">pomguard-core</td>
-                            <td style="padding: 12px 10px; border: 1px solid var(--border-color); color: #a3b18a;" th:text="${session.findings}">0 Issues</td>
+                        <tr th:each="audit : ${sessions}" style="border-bottom: 1px solid var(--border-color); transition: background 0.2s;" onmouseover="this.style.background='rgba(112, 161, 255, 0.1)'" onmouseout="this.style.background='transparent'">
+                            <td style="padding: 12px 10px; border: 1px solid var(--border-color); color: #88cc44;" th:text="${audit.getFormattedDate()}">2026-05-01 12:45</td>
+                            <td style="padding: 12px 10px; border: 1px solid var(--border-color); color: var(--text-color); font-weight: bold;" th:text="${audit.projectName()}">pomguard-core</td>
+                            <td style="padding: 12px 10px; border: 1px solid var(--border-color); color: #a3b18a;" th:text="${audit.findings()}">0 Issues</td>
                             <td style="padding: 12px 10px; border: 1px solid var(--border-color);">
-                                <span th:class="'status-badge ' + ${session.statusClass}" th:text="${session.statusText}">SECURE</span>
+                                <span class="status-badge" th:classappend="${audit.statusClass()}" th:text="${audit.statusText()}">SECURE</span>
                             </td>
                             <td style="padding: 12px 10px; border: 1px solid var(--border-color); text-align: center;">
-                                <button style="background: none; border: 1px dashed #70a1ff; color: #70a1ff; padding: 4px 10px; cursor: pointer; font-family: var(--pixel-font); font-size: 1.1rem; transition: all 0.2s;" onmouseover="this.style.background='#70a1ff'; this.style.color='#0c0c0c'" onmouseout="this.style.background='none'; this.style.color='#70a1ff'">VIEW</button>
+                                <div style="display: flex; gap: 8px; justify-content: center; align-items: center;">
+                                    <button style="background: none; border: 1px dashed #70a1ff; color: #70a1ff; padding: 4px 10px; cursor: pointer; font-family: var(--pixel-font); font-size: 1.1rem; transition: all 0.2s;" onmouseover="this.style.background='#70a1ff'; this.style.color='#0c0c0c'" onmouseout="this.style.background='none'; this.style.color='#70a1ff'">VIEW</button>
+                                    <form th:action="@{/history/delete}" method="post" style="margin: 0; display: inline;">
+                                        <input type="hidden" name="id" th:value="${audit.id()}" />
+                                        <button type="submit" style="background: none; border: 1px dashed var(--accent-pink); color: var(--accent-pink); padding: 4px 10px; cursor: pointer; font-family: var(--pixel-font); font-size: 1.1rem; transition: all 0.2s;" onmouseover="this.style.background='var(--accent-pink)'; this.style.color='#0c0c0c'" onmouseout="this.style.background='none'; this.style.color='var(--accent-pink)'">DELETE</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                         <!-- Empty State -->
-                        <tr th:if="${#lists.isEmpty(sessions)}">
+                        <tr th:if="${sessions == null or sessions.empty}">
                             <td colspan="5" style="padding: 20px; text-align: center; color: #555; font-style: italic; border: 1px solid var(--border-color);">No past sessions found. Run a new audit to generate history.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             
-            <div th:if="${not #lists.isEmpty(sessions)}" style="display: flex; justify-content: flex-end; margin-top: 1rem;">
-                <div style="font-family: var(--pixel-font); font-size: 1.2rem; color: #666; text-transform: uppercase;">Showing <span th:text="${#lists.size(sessions)}">0</span> sessions</div>
+            <div th:if="${sessions != null and not sessions.empty}" style="display: flex; justify-content: flex-end; margin-top: 1rem;">
+                <div style="font-family: var(--pixel-font); font-size: 1.2rem; color: #666; text-transform: uppercase;">Showing <span th:text="${sessions.size()}">0</span> sessions</div>
             </div>
         </div>
     </div>

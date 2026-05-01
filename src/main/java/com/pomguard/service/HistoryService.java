@@ -66,6 +66,10 @@ public class HistoryService {
         }
     }
 
+    public void deleteSession(String id) {
+        sessions.removeIf(session -> session.id().equals(id));
+    }
+
     public List<AuditSession> getRecentSessions() {
         return Collections.unmodifiableList(sessions);
     }

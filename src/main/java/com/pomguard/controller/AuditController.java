@@ -47,6 +47,12 @@ public class AuditController {
         return "result";
     }
 
+    @PostMapping("/history/delete")
+    public String deleteHistory(@RequestParam("id") String id) {
+        historyService.deleteSession(id);
+        return "redirect:/";
+    }
+
     @GetMapping("/health")
     @ResponseBody
     public String health() {

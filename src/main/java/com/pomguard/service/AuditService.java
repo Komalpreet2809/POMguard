@@ -19,7 +19,7 @@ public class AuditService {
     }
 
     public List<AuditResult> audit(List<Dependency> dependencies) {
-        return dependencies.stream().map(this::auditOne).toList();
+        return dependencies.parallelStream().map(this::auditOne).toList();
     }
 
     private AuditResult auditOne(Dependency dep) {
