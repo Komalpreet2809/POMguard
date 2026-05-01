@@ -681,9 +681,9 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     .sidebar {
         width: 100%;
         height: auto;
-        padding: 1rem;
+        padding: 1rem 1.5rem;
         flex-direction: row;
-        flex-wrap: wrap;
+        display: flex;
         align-items: center;
         justify-content: space-between;
         position: relative;
@@ -693,32 +693,39 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     .logo-section {
         margin: 0;
         border-bottom: none;
+        flex-shrink: 0;
     }
 
     .logo-section h1 {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+    }
+
+    /* Position sparkle correctly on mobile logo */
+    .logo-section [style*="position: absolute"] {
+        top: -10px !important;
+        right: -5px !important;
     }
 
     .tagline {
-        display: none; /* Hide tagline on mobile/tablet sidebar */
+        display: none;
     }
 
     .mascot-area {
-        display: none; /* Hide mascot in top-bar mode */
+        display: none;
     }
 
     .sidebar nav {
-        width: 100%;
-        margin-top: 10px;
+        width: auto; /* Allow nav to sit next to logo */
+        margin-top: 0;
     }
 
     .sidebar nav ul {
         display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 5px;
+        justify-content: flex-end;
+        flex-wrap: nowrap;
+        gap: 15px;
         margin: 0;
-        padding: 0 10px;
+        padding: 0;
     }
 
     .sidebar nav li {
@@ -727,8 +734,9 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     }
 
     .sidebar nav li a {
-        padding: 5px 10px;
-        font-size: 1rem;
+        padding: 4px 8px;
+        font-size: 0.95rem;
+        white-space: nowrap;
     }
 
     .sidebar-footer {
@@ -775,6 +783,29 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 
 /* MOBILE (768px and below) */
 @media screen and (max-width: 768px) {
+    .sidebar {
+        flex-direction: column; /* Stack on smaller mobile */
+        gap: 10px;
+        padding: 1rem;
+    }
+
+    .logo-section h1 {
+        font-size: 2.5rem;
+    }
+
+    .sidebar nav {
+        width: 100%;
+    }
+
+    .sidebar nav ul {
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .sidebar nav li a {
+        font-size: 0.9rem;
+    }
+
     body {
         padding: 8px;
     }
