@@ -714,8 +714,11 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 
     .sidebar nav ul {
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 5px;
         margin: 0;
+        padding: 0 10px;
     }
 
     .sidebar nav li {
@@ -782,6 +785,8 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 
     .hero-text h2 {
         font-size: 2.2rem !important;
+        line-height: 1.2 !important; /* Increased for wrap safety */
+        margin-bottom: 1.5rem !important;
     }
 
     .hero-text p {
