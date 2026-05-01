@@ -608,7 +608,7 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     font-size: 3rem;
     margin-bottom: 1.5rem;
     text-transform: uppercase;
-    color: var(--accent-pink);
+    color: #70a1ff; /* Bright Blue */
     text-shadow: 3px 3px 0 #000;
 }
 
@@ -624,7 +624,7 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
 
 .progress-bar {
     height: 100%;
-    background: var(--accent-pink);
+    background: #70a1ff; /* Bright Blue */
     width: 0%;
     transition: width 0.1s linear;
     position: relative;
@@ -660,8 +660,8 @@ nav a.active svg { opacity: 1; stroke: var(--accent-pink); }
     position: absolute;
     width: 100%;
     height: 20px;
-    background: rgba(255, 95, 126, 0.1);
-    border-bottom: 2px dashed var(--accent-pink);
+    background: rgba(112, 161, 255, 0.1);
+    border-bottom: 2px dashed #70a1ff;
     top: 0;
     animation: scanline 3s linear infinite;
     pointer-events: none;
