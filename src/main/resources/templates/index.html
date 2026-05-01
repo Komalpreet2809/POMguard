@@ -136,7 +136,19 @@
 
                     <div class="hero-console-wrapper" style="position: relative; margin-top: 2rem; transform: translateX(-120px);">
                         <!-- Nested Upload Window -->
-                        <div class="hero-console" style="background: var(--window-bg); border-style: solid; border-width: 4px; border-image-source: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%230c0c0c%22 d=%22M4 0h4v2h2v2h2v4h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2V0z%22/%3E%3C/svg%3E'); border-image-slice: 4; box-shadow: 10px 10px 0 rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; width: 420px; min-height: 350px;">
+                        <div class="hero-console" style="background: var(--window-bg); border-style: solid; border-width: 4px; border-image-source: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 12 12%22%3E%3Cpath fill=%22%230c0c0c%22 d=%22M4 0h4v2h2v2h2v4h-2v2h-2v2H4v-2H2v-2H0V4h2V2h2V0z%22/%3E%3C/svg%3E'); border-image-slice: 4; box-shadow: 10px 10px 0 rgba(0,0,0,0.1); border-radius: 4px; overflow: hidden; display: flex; flex-direction: column; width: 420px; min-height: 350px; position: relative;">
+                            
+                            <!-- Scanning Overlay -->
+                            <div id="scan-overlay" class="scanning-overlay">
+                                <div class="scanline"></div>
+                                <div class="scanning-text">Scanning Dependencies...</div>
+                                <div class="progress-container">
+                                    <div id="scan-progress" class="progress-bar"></div>
+                                </div>
+                                <div style="margin-top: 1rem; font-family: var(--terminal-font); font-size: 0.8rem; color: #88cc44; opacity: 0.8;">
+                                    FETCHING MAVEN METADATA...
+                                </div>
+                            </div>
                             
                             <!-- Inner Window Header -->
                             <div style="background: var(--bg-color); color: #88cc44; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center;">
@@ -165,7 +177,7 @@
 
                             <!-- Action Footer Bar -->
                             <div style="background: rgba(0,0,0,0.05); border-top: 2px solid rgba(0,0,0,0.1); padding: 12px 25px; display: flex; align-items: center; justify-content: flex-end;">
-                                <button type="button" onclick="const fileInput = document.getElementById('file'); if(fileInput.files.length === 0) { fileInput.click(); } else { document.getElementById('upload-form').submit(); }" style="background: var(--accent-pink); color: #0c0c0c; border: 3px solid #0c0c0c; padding: 10px 25px; font-weight: bold; font-family: var(--pixel-font); font-size: 1.2rem; box-shadow: 4px 4px 0 #0c0c0c; cursor: pointer; transition: transform 0.1s;">
+                                <button type="button" id="start-audit-btn" onclick="handleAuditClick()" style="background: var(--accent-pink); color: #0c0c0c; border: 3px solid #0c0c0c; padding: 10px 25px; font-weight: bold; font-family: var(--pixel-font); font-size: 1.2rem; box-shadow: 4px 4px 0 #0c0c0c; cursor: pointer; transition: transform 0.1s;">
                                     START AUDIT
                                 </button>
                             </div>
@@ -345,6 +357,44 @@
                 }, (index + 1) * 600);
             });
         });
+
+        function handleAuditClick() {
+            const fileInput = document.getElementById('file');
+            if (fileInput.files.length === 0) {
+                fileInput.click();
+            } else {
+                startScanning();
+            }
+        }
+
+        function startScanning() {
+            const overlay = document.getElementById('scan-overlay');
+            const progress = document.getElementById('scan-progress');
+            const btn = document.getElementById('start-audit-btn');
+            const form = document.getElementById('upload-form');
+
+            overlay.classList.add('active');
+            btn.innerText = "SCANNING...";
+            btn.disabled = true;
+            btn.style.opacity = "0.5";
+            btn.style.cursor = "not-allowed";
+
+            let width = 0;
+            const interval = setInterval(() => {
+                if (width >= 90) {
+                    clearInterval(interval);
+                } else {
+                    width += Math.random() * 10;
+                    if (width > 90) width = 90;
+                    progress.style.width = width + '%';
+                }
+            }, 200);
+
+            // Give it a tiny delay for visual effect before submitting
+            setTimeout(() => {
+                form.submit();
+            }, 800);
+        }
     </script>
 </body>
 </html>
